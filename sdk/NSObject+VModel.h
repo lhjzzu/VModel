@@ -9,6 +9,21 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (VModel)
+/**
+ *  用json数据来初始化这个model
+ *
+ *  @param json json数据
+ *
+ *  @return 赋值后的model
+ */
+
+- (instancetype)initVModelWithJSON:(id)json;
+
+/**
+ *  用json数据来给这个model赋值
+ *
+ */
+- (void)v_injectWithJSON:(id)json;
 
 /**
  *  JSON字段和model属性的映射
@@ -20,14 +35,4 @@
  *  @return 映射字典
  */
 - (NSDictionary *)v_modelPropertyMapper;
-/**
- *  用json数据来初始化这个model
- *
- *  @param json json数据
- *
- *  @return 赋值后的model
- */
-
-- (instancetype)initVModelWithJSON:(id)json;
-
 @end

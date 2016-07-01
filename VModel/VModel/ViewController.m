@@ -33,7 +33,9 @@
      * 2 数组里面元素为字典@[@{},@{}...]
      */
     NSArray *companyJson =  @[@{@"name":@"蚩尤",@"sex":@(1)},@{@"name":@"仓颉",@"sex":@(0)}];
-    Company *company = [[Company alloc] initVModelWithJSON:companyJson];
+    Company *company = [[Company alloc] init];
+    [company v_injectWithJSON:companyJson];
+    
     for (Person *person in company.persons) {
         NSLog(@"company person: %@ %@",person.name,person.sex);
     }

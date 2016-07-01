@@ -14,12 +14,18 @@
 {
     self = [self init];
     if (self) {
-        [self v_setupCachedPropertyMapper];
-        [self v_setupPropertyAttributesDic];
-        [self v_injectJson:json];
+        [self v_injectWithJSON:json];
     }
     return self;
 }
+
+- (void)v_injectWithJSON:(id)json
+{
+    [self v_setupCachedPropertyMapper];
+    [self v_setupPropertyAttributesDic];
+    [self v_injectJson:json];
+}
+
 - (void)v_setupCachedPropertyMapper {
     if (!objc_getAssociatedObject(self, _cmd)) {
         NSDictionary *dic = [self v_modelPropertyMapper];
@@ -92,7 +98,7 @@
 - (id)v_valueWithAttributeModel:(VModelPropertyAttributes *)attributeModel withJsonVaule:(id)value {
     id returnValue = nil;
     if (value == nil || [value isKindOfClass:[NSNull class]]) {
-        returnValue = value;
+        returnValue = nil;
     } else {
         if (attributeModel.encodeType != VClassEncodeTypeObject) {
             if (attributeModel.encodeType == VClassEncodeTypeInt || attributeModel.encodeType == VClassEncodeTypeShort || attributeModel.encodeType == VClassEncodeTypeUnsignedInt || attributeModel.encodeType == VClassEncodeTypeUnsignedShort) {
